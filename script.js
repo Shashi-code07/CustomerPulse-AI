@@ -906,6 +906,16 @@ function runRiskAnalysis() {
     "dynamicActionText"
   ).textContent = action;
 
+  // RESET RECOMMENDED ACTION BUTTON
+
+const actionButtons = document.querySelectorAll(".dynamic-action-btn");
+
+actionButtons.forEach((button) => {
+  button.innerHTML = "🚀 Take Recommended Action →";
+  button.disabled = false;
+  button.style.opacity = "1";
+  button.style.cursor = "pointer";
+});
 
   // HIDE EMPTY STATE
 
@@ -1497,4 +1507,78 @@ function simulateRiskImpact() {
         "whatIfInsight"
     ).textContent = insight;
 
+}
+// ==========================================
+// TAKE RECOMMENDED ACTION
+// ==========================================
+
+function takeRecommendedAction() {
+
+  const customerName =
+    document.getElementById("resultCustomerName").textContent;
+
+  const riskScore =
+    document.getElementById("dynamicRiskScore").textContent;
+
+  // Check if analysis has been performed
+  if (!riskScore || riskScore === "0%") {
+    alert("🤖 Please analyze a customer first.");
+    return;
+  }
+
+  const button = document.getElementById("takeActionBtn");
+
+  if (button) {
+    button.innerHTML = "✓ Action Initiated";
+    button.disabled = true;
+    button.style.opacity = "0.7";
+    button.style.cursor = "default";
+  }
+
+  alert(
+    "🚀 Recommended Action Initiated!\n\n" +
+    "Customer: " + customerName + "\n" +
+    "Churn Risk: " + riskScore + "\n\n" +
+    "✓ Priority outreach added\n" +
+    "✓ Customer success intervention initiated\n" +
+    "✓ Follow-up action scheduled"
+  );
+}
+// ==========================================
+// DYNAMIC RECOMMENDED ACTION
+// ==========================================
+
+function startDynamicRetentionPlan() {
+  const actionText = document.getElementById("dynamicActionText");
+  const riskScore = document.getElementById("dynamicRiskScore");
+  const customerName = document.getElementById("resultCustomerName");
+
+  // Check whether analysis has been completed
+  if (!actionText || !actionText.textContent.trim()) {
+    alert("🤖 Please analyze a customer first.");
+    return;
+  }
+
+  const customer = customerName.textContent || "Customer";
+  const risk = riskScore.textContent || "Unknown";
+
+  // Show success confirmation
+  alert(
+    "🚀 Retention Action Initiated!\n\n" +
+    "Customer: " + customer + "\n" +
+    "Current Churn Risk: " + risk + "\n\n" +
+    "✓ Priority outreach initiated\n" +
+    "✓ Customer success follow-up scheduled\n" +
+    "✓ Recommended retention workflow activated"
+  );
+
+  // Update button
+  const buttons = document.querySelectorAll(".dynamic-action-btn");
+
+  buttons.forEach((button) => {
+    button.innerHTML = "✓ Action Initiated";
+    button.disabled = true;
+    button.style.opacity = "0.7";
+    button.style.cursor = "default";
+  });
 }
