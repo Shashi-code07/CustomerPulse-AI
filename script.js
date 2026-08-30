@@ -1544,34 +1544,39 @@ function takeRecommendedAction() {
     "✓ Follow-up action scheduled"
   );
 }
-// ==========================================
-// DYNAMIC RECOMMENDED ACTION
-// ==========================================
-
 function startDynamicRetentionPlan() {
-  const actionText = document.getElementById("dynamicActionText");
-  const riskScore = document.getElementById("dynamicRiskScore");
-  const customerName = document.getElementById("resultCustomerName");
 
-  // Check whether analysis has been completed
-  if (!actionText || !actionText.textContent.trim()) {
+  const customerName =
+    document.getElementById("resultCustomerName");
+
+  const riskScore =
+    document.getElementById("dynamicRiskScore");
+
+  // Check analysis first
+  if (!riskScore || riskScore.textContent === "0%") {
     alert("🤖 Please analyze a customer first.");
     return;
   }
 
-  const customer = customerName.textContent || "Customer";
-  const risk = riskScore.textContent || "Unknown";
-
-  // Show success confirmation
   alert(
     "🚀 Retention Action Initiated!\n\n" +
-    "Customer: " + customer + "\n" +
-    "Current Churn Risk: " + risk + "\n\n" +
+    "Customer: " + customerName.textContent + "\n" +
+    "Current Churn Risk: " + riskScore.textContent + "\n\n" +
     "✓ Priority outreach initiated\n" +
     "✓ Customer success follow-up scheduled\n" +
-    "✓ Recommended retention workflow activated"
+    "✓ Retention workflow activated successfully"
   );
 
+  const button =
+    document.getElementById("takeActionBtn");
+
+  if (button) {
+    button.innerHTML = "✓ Action Initiated";
+    button.disabled = true;
+    button.style.opacity = "0.7";
+    button.style.cursor = "default";
+  }
+}
   // Update button
   const buttons = document.querySelectorAll(".dynamic-action-btn");
 
