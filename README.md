@@ -10,7 +10,7 @@ The platform analyzes important customer signals and transforms them into action
 
 ## 🚀 Live Demo
 
-🔗 **Live Product:** https://github.com/Shashi-code07/CustomerPulse-AI
+🔗 **Live Product:**https://shashi-code07.github.io/CustomerPulse-AI/
 
 ---
 
